@@ -156,9 +156,10 @@ button:hover {
 }
 
 .load-more {
+  margin-right: 50%;
+  margin-left: 50%;
+  margin-top: 32px;
   display: none;
-  margin-top: 20px;
-  padding: 10px 20px;
   background-color: #4e75ff;
   color: white;
   border: none;
