@@ -1,19 +1,21 @@
-export function getPosts(searchQuery) {
+import axios from 'axios';
 
+export async function getPosts(searchQuery, page, perPage) {
     const BASE_URL = "https://pixabay.com/api/";
-    const params = new URLSearchParams({
+    const params = {
         key: "44102450-6df98fde061003ef9a12efa89",
         q: searchQuery,
         image_type: "photo",
         orientation: "horizontal",
-        safesearch: true
-    });
+        safesearch: true,
+        page,
+        per_page: perPage
+    };
 
-    const url = `${BASE_URL}?${params}`;
-
-    return fetch(url)
-        .then(respond => respond.json())
-        .catch(error => {
-            throw new Error (`HTTP error! status: ${response.status}`)
-        })
+    try {
+        const response = await axios.get(BASE_URL, { params });
+        return response.data;
+    } catch (error) {
+        throw new Error(`HTTP error! status: ${error.response.status}`);
+    }
 };
