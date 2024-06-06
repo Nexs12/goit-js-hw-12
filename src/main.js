@@ -94,21 +94,16 @@ async function loadMore() {
         lightbox.refresh();
 
         scrollToNewImages();
-
-        if (data.hits.length < perPage) {
-            hideLoadMoreBtn();
-            iziToast.info({
-                position: 'topRight',
-                message: "We're sorry, but you've reached the end of search results.",
-            });
-        }
+        
     } catch (error) {
-        iziToast.warning({
-            title: "Error",
-            message: `Something went wrong. ${error.message}`
+        iziToast.info({
+            position: 'topRight',
+            message: `We're sorry, but you've reached the end of search results. ${error.message}`
         });
+        hideLoadMoreBtn();
     } finally {
         hideLoader();
+        
     }
 }
 

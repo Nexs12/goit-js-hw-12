@@ -13,7 +13,6 @@ section {
   gap: 32px;
 
   margin-top: 36px;
-  margin-bottom: 32px;
 }
 
 .search-form {
@@ -158,7 +157,7 @@ button:hover {
 .load-more {
   margin-right: 50%;
   margin-left: 50%;
-  margin-top: 32px;
+  margin-bottom: 36px;
   display: none;
   background-color: #4e75ff;
   color: white;
