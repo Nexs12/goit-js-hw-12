@@ -15,7 +15,11 @@ const loadMoreBtn = document.querySelector(".load-more");
 let searchQuery = '';
 let page = 1;
 const perPage = 15;
-
+const lightbox = new SimpleLightbox(".gallery a", {
+            captions: true,
+            captionsData: 'alt',
+            captionDelay: 250 
+        });
 hideLoader();
 
 async function handleSubmit(event) {
@@ -50,14 +54,9 @@ async function handleSubmit(event) {
         const markup = postsTemplate(data.hits);
         postsGallery.insertAdjacentHTML("beforeend", markup);
 
-        const lightbox = new SimpleLightbox(".gallery a", {
-            captions: true,
-            captionsData: 'alt',
-            captionDelay: 250 
-        });
         lightbox.refresh();
 
-        if (data.hits.length === perPage) {
+        if (page < totalPages) {
             showLoadMoreBtn();
         } else {
             iziToast.info({
@@ -85,15 +84,17 @@ async function loadMore() {
 
         const markup = postsTemplate(data.hits);
         postsGallery.insertAdjacentHTML("beforeend", markup);
-
-        const lightbox = new SimpleLightbox(".gallery a", {
-            captions: true,
-            captionsData: 'alt',
-            captionDelay: 250 
-        });
         lightbox.refresh();
 
         scrollToNewImages();
+
+        if (page >= totalPages) {
+            hideLoadMoreBtn();
+            iziToast.info({
+                position: 'topRight',
+                message: "We're sorry, but you've reached the end of search results.",
+            });
+        }
         
     } catch (error) {
         iziToast.info({
