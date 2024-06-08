@@ -56,7 +56,7 @@ async function handleSubmit(event) {
 
         lightbox.refresh();
 
-        if (page < totalPages) {
+        if (data.totalHits / perPage > page) {
             showLoadMoreBtn();
         } else {
             iziToast.info({
@@ -88,7 +88,7 @@ async function loadMore() {
 
         scrollToNewImages();
 
-        if (page >= totalPages) {
+        if ((data.totalHits / perPage) <= page) {
             hideLoadMoreBtn();
             iziToast.info({
                 position: 'topRight',
